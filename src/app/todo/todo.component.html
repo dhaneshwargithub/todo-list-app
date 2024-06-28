@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <div class="card" [ngClass]="{'dark-theme': isDarkMode}">
+    <div class="card-header">
+      <h3>
+        Todo List App
+        <button class="btn btn-sm btn-dark ms-3 position-relative" (click)="toggleDarkMode()">
+          <span *ngIf="isDarkMode" aria-label="Switch to Light Mode">
+            <i class="bi bi-moon-stars"></i> Light Mode
+          </span>
+          <span *ngIf="!isDarkMode" aria-label="Switch to Dark Mode">
+            <i class="bi bi-moon"></i> Dark Mode
+          </span>
+        </button> 
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter Task" [(ngModel)]="newTask" (keyup.enter)="addTask()">
+        <input type="date" class="form-control" [(ngModel)]="newTaskDueDate">
+        <button class="btn btn-primary" (click)="addTask()">+ ADD</button>
+      </div>
+      <ul class="list-group">
+        <li *ngFor="let task of tasks" class="list-group-item d-flex justify-content-between align-items-center">
+          <div *ngIf="!task.isEditing">
+            {{ task.name }} (Due: {{ task.dueDate | date: 'shortDate' }})
+            <button class="btn btn-sm btn-link" (click)="editTask(task)">Edit</button>
+          </div>
+          <div *ngIf="task.isEditing">
+            <input [(ngModel)]="task.editName" class="form-control me-2">
+            <input type="date" class="form-control" [(ngModel)]="task.editDueDate">
+            <button class="btn btn-success btn-sm" (click)="saveTask(task)">Save</button>
+            <button class="btn btn-danger btn-sm" (click)="task.isEditing = false">Cancel</button>
+          </div>
+          <div>
+            <button class="btn btn-success btn-sm me-2" (click)="completeTask(task)">
+              Completed
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="deleteTask(task)">
+              Remove
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="completedTasks.length" class="card-footer text-center">
+      <h4>Completed Tasks</h4>
+      <ul class="list-group">
+        <li *ngFor="let task of completedTasks" class="list-group-item d-flex justify-content-between align-items-center">
+          {{ task.name }} (Due: {{ task.dueDate | date: 'shortDate' }})
+          <button class="btn btn-danger btn-sm" (click)="deleteTask(task)">
+            Remove
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

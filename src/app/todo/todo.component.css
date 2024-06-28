@@ -1,0 +1,31 @@
+.dark-theme {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .dark-theme .card-header {
+    background-color: #555;
+  }
+  
+  /* Add more dark mode styles as needed */
+
+  .btn-dark i.bi-moon {
+    position: relative;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-color: #ffc107; /* Adjust color as needed */
+    border-radius: 50%;
+  }
+  
+  .btn-dark i.bi-moon::before {
+    content: '';
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: #343a40; /* Adjust color as needed */
+    border-radius: 50%;
+    top: 0.1rem;
+    left: 0.1rem;
+  }
+  
